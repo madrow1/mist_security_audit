@@ -11,6 +11,7 @@ import backend
 import requests
 from get_ap_version import get_ap_firmware_versions
 from get_switch_version import get_switch_firmware_versions 
+from get_wlan_sec_settings import get_wlans
 import pandas as pd 
 import os 
 import concurrent.futures
@@ -29,16 +30,18 @@ def run_checks_concurrently():
             "switch_templates": executor.submit(validate_switch_templates),
             "ap_firmware": executor.submit(get_ap_firmware_versions),
             "switch_firmware": executor.submit(get_switch_firmware_versions),
+            "wlans": executor.submit(get_wlans),
         }
 
         admin_score, failing_admins = futures["admin"].result()
         firmware_score, failing_sites = futures["firmware"].result()
         password_score, recommendations = futures["password"].result()
         switch_template_score, switch_fail_log = futures["switch_templates"].result()
-        ap_firmware_versions, ap_firmware_recommendations, access_points = futures["ap_firmware"].result()
+        ap_firmware_score, ap_firmware_recommendations, access_points = futures["ap_firmware"].result()
         switch_firmware_score, switch_firmware_versions, switches = futures["switch_firmware"].result()
+        wlans_table, wlan_score = futures["wlans"].result()
 
-    return admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_versions, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches
+    return admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_score, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches, wlans_table, wlan_score
 
 def json_to_bullet_points(json_data):
     bullet_points = ""
@@ -68,14 +71,14 @@ def json_to_bullet_points(json_data):
     return bullet_points
     
 def pie_chart():
-    admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_versions, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches = run_checks_concurrently()
+    admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_score, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches, wlans_table, wlan_score = run_checks_concurrently()
     run_tests = True
 
     # Create tabs
     tab1, tab2 = st.tabs(["Current Score", "Previous Score"])
 
     timestamp = datetime.today().strftime('%Y-%m-%d %H-%M-%S')
-    colors = ['#2D6A00', '#84B135', '#CCDB2A', '#0095A9','#E6ED95','#245200','#FFFFFF']
+    colors = ['#2D6A00', '#84B135', '#CCDB2A', '#0095A9','#E6ED95','#245200', '#E87200','#FFFFFF']
     max_value = 50
 
     with st.sidebar:
@@ -93,8 +96,8 @@ def pie_chart():
                 log = {}
 
                 # Original labels and scores
-                all_labels = [f'Admin accounts', "Auto firmware update", "Password policy", "Switch templates", "AP Security", "Switch Security"]
-                all_scores = [admin_score, firmware_score, password_score, switch_template_score, ap_firmware_versions, switch_firmware_score]
+                all_labels = [f'Admin accounts', "Auto firmware update", "Password policy", "Switch templates", "AP Security", "Switch Security", "WLAN Security"]
+                all_scores = [admin_score, firmware_score, password_score, switch_template_score, ap_firmware_score, switch_firmware_score, wlan_score]
 
                 # Filter out scores that are 0
                 filtered_data = [(label, score, color) for label, score, color in zip(all_labels, all_scores, colors) if score > 0]
@@ -107,11 +110,10 @@ def pie_chart():
                 total_value = sum(scores)
                 missing_val = max_value - total_value
 
-                # Only add the empty segment if there's missing value
                 if missing_val > 0:
                     labels.append("")  
                     scores.append(missing_val)
-                    filtered_colors.append('#FFFFFF')  # White for missing value
+                    filtered_colors.append('#FFFFFF')  
 
                 try:
                     with open('sec_audit_log.log', 'r') as file:
@@ -122,7 +124,6 @@ def pie_chart():
                 if timestamp not in log:
                     log[timestamp] = {}
 
-                # Log all original scores (including zeros) for historical tracking
                 for i, label in enumerate(all_labels):
                     score = all_scores[i]
                     match label:
@@ -138,6 +139,8 @@ def pie_chart():
                             log[timestamp][label] = {"score": score, "AP Firmware": ap_firmware_recommendations}
                         case "Switch Security":
                             log[timestamp][label] = {"score": score, "Switch firmware": switch_firmware_versions}
+                        case "WLAN Security":
+                            log[timestamp][label] = {"score": score, "WLAN firmware": None}
 
                 # Add missing value to log
                 if missing_val > 0:
@@ -146,7 +149,6 @@ def pie_chart():
                 with open('sec_audit_log.log', 'w') as file:
                     json.dump(log, file, indent=4)
 
-                # Create figure with larger size for better label spacing
                 fig1, ax1 = plt.subplots(figsize=(18, 18))
                 
                 # Only create pie chart if there are scores to display
@@ -224,13 +226,14 @@ def pie_chart():
                     st.text(json_to_bullet_points(switch_fail_log))
                     if st.button("Apply recommended switch template fixes", key=f'switch_template_recommended_solution{timestamp}'):
                         update_switch_templates(api_response=backend.get_api('api.json'))    
-                    st.subheader(f"AP security: {ap_firmware_versions}/10")
+                    st.subheader(f"AP security: {ap_firmware_score}/10")
                     st.text(json_to_bullet_points(ap_firmware_recommendations))
                     if st.button("Upgrade AP firmware to latest recommended version", key=f'apply_ap_firmware_upgrade{timestamp}'):
                         update_firmware(api_response=backend.get_site_api('api.json'))  
                         print("button pressed")
                     st.subheader(f"Switch security: {switch_firmware_score}/10")
                     st.text(json_to_bullet_points(switch_firmware_versions))
+                    st.subheader(f"WLAN Security: {wlan_score}/10")
 
                 run_tests = False
 
@@ -259,7 +262,7 @@ def pie_chart():
                     previous_data = data[previous_timestamp]
 
                     # Original labels and scores (same order as tab1)
-                    all_p_labels = ['Admin accounts', "Auto firmware update", "Password policy", "Switch templates", "AP Security", "Switch Security"]
+                    all_p_labels = ['Admin accounts', "Auto firmware update", "Password policy", "Switch templates", "AP Security", "Switch Security", "WLAN Security"]
                     all_p_scores = []
                     
                     # Extract scores in the same order as tab1
@@ -389,6 +392,9 @@ def pie_chart():
                     if 'Switch Security' in previous_data and previous_data['Switch Security'].get('score', 0) > 0:
                         st.subheader("Switch security")
                         st.text(json_to_bullet_points(previous_data['Switch Security']))
+                  
+                    if 'WLAN Security' in previous_data and previous_data['WLAN Security'].get('score', 0) > 0:
+                        st.subheader("Switch security")
 
             except (FileNotFoundError, json.JSONDecodeError):
                 st.error("No previous audit data found")
@@ -481,7 +487,7 @@ def switch_inventory():
     )
 
 def ap_inventory():
-    ap_firmware_versions, ap_firmware_recommendations, access_points = get_ap_firmware_versions()
+    ap_firmware_score, ap_firmware_recommendations, access_points = get_ap_firmware_score()
 
     ap_firmware_dict = {
         "AP45": "0.12",
@@ -544,7 +550,7 @@ def ap_inventory():
 def raw_logs():
     count = 0
     with st.sidebar:
-        st.markdown(f"# {list(page_names_to_funcs.keys())[5]}")
+        st.markdown(f"# {list(page_names_to_funcs.keys())[6]}")
         st.markdown("    - This page shows the audit logs used to generate tables and graphs from other pages")
         st.markdown("    - This data can be downloaded by scrolling to the bottom of the page and clicking download")
 
@@ -692,6 +698,15 @@ def histogram():
 
     st.pyplot(fig)
 
+def wlan_settings():
+    with st.sidebar:
+        st.markdown(f"# {list(page_names_to_funcs.keys())[5]}")
+
+    wlans, score = get_wlans()
+
+    st.dataframe(wlans)
+    
+
 if not os.path.exists('api.json'):
     page_names_to_funcs = {
         "Org settings": org_settings,
@@ -703,6 +718,7 @@ else:
         "Histogram": histogram,
         "Switch inventory": switch_inventory,
         "AP inventory": ap_inventory,
+        "WLAN Settings": wlan_settings,
         "Raw log files": raw_logs
     }
 

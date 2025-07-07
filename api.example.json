@@ -1,0 +1,7 @@
+{
+    "api": {
+        "org_id": "",
+        "token": "",
+        "mist_url": "https://api.eu.mist.com/api/v1/"
+    }
+}
