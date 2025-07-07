@@ -1,0 +1,632 @@
+{
+    "2025-07-01 11-52-57": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 11-53-03": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 11-53-29": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 11-53-55": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 11-54-22": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 11-58-53": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 12-01-10": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 12-02-17": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 12-03-21": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 12-03-38": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 12-11-14": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 12-12-17": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 12-57-57": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    },
+    "2025-07-01 12-58-45": {
+        "Admin accounts": {
+            "score": 5,
+            "Accounts": {
+                "Admin 1": "2FA not enabled for this admin account: jweidenbaum@juniper.net",
+                "Admin 2": "2FA not enabled for this admin account: rpitt@juniper.net"
+            }
+        },
+        "Auto firmware update": {
+            "score": 7,
+            "Autofirmware update": {
+                "Failing sites, auto-firmware upgrade should be enabled for the below sites": [
+                    "America Site 2"
+                ]
+            }
+        },
+        "Password policy": {
+            "score": 4,
+            "Password Policy": {
+                "Password Policy Recommendation": "No recommendation, policy set",
+                "Minimum Length Recommendation": "Increase length to greater than 8 characters",
+                "Special Char Recommendation": "No recommendation, policy set",
+                "2FA Recommendation": "Enable 2FA"
+            }
+        },
+        "Switch templates": {
+            "score": 10,
+            "Switch Templates": {}
+        },
+        "AP Security": {
+            "score": 0,
+            "AP Firmware": {
+                "A0029220200E3": "Firmware out of date, recommended firmware is 0.12.27452"
+            }
+        },
+        "Switch Security": {
+            "score": 0,
+            "Switch firmware": {
+                "HV3622430404": "Firmware out of date, recommended firmware is 23.4R2"
+            }
+        },
+        "": {
+            "score": 24
+        }
+    }
+}

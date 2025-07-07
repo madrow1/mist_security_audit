@@ -1,0 +1,10 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+api.json
+__pycache__
+lib
+include
+tests
+bin
+.streamlit
+.git
+share
