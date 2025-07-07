@@ -27,7 +27,7 @@ def get_wlans():
         # Only calculate score for enabled WLANs
         if enabled:
             security_checks = [
-                auth_type in ['eap', 'psk'],  
+                auth_type in ['eap', 'psk', 'eap192', 'psk', 'psk-tkip', 'psk-wpa2-tkip', 'wep'],  
                 enable_mac_auth,              
                 private_wlan,                
                 radsec_enabled,               

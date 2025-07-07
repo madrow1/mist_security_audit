@@ -78,8 +78,10 @@ def pie_chart():
     tab1, tab2 = st.tabs(["Current Score", "Previous Score"])
 
     timestamp = datetime.today().strftime('%Y-%m-%d %H-%M-%S')
+    # Assign colors to sections of the pie chart. A new color needs to be added each time a new object is added, otherwise the section will be white.
+    # This could be automated, however for consistency (and to keep the colours to Juniper official) I have kept it manual for now;
     colors = ['#2D6A00', '#84B135', '#CCDB2A', '#0095A9','#E6ED95','#245200', '#E87200','#FFFFFF']
-    max_value = 50
+
 
     with st.sidebar:
         st.markdown(f"# {list(page_names_to_funcs.keys())[1]}")
@@ -98,6 +100,9 @@ def pie_chart():
                 # Original labels and scores
                 all_labels = [f'Admin accounts', "Auto firmware update", "Password policy", "Switch templates", "AP Security", "Switch Security", "WLAN Security"]
                 all_scores = [admin_score, firmware_score, password_score, switch_template_score, ap_firmware_score, switch_firmware_score, wlan_score]
+
+                # Max value is calculated as the length of the list "all_scores" * 10 so that it can be compared against the percentage values returned by max score.
+                max_value = len(all_scores) * 10
 
                 # Filter out scores that are 0
                 filtered_data = [(label, score, color) for label, score, color in zip(all_labels, all_scores, colors) if score > 0]
@@ -177,12 +182,11 @@ def pie_chart():
                             x, y = text.get_position()
                             
                             # Adjust position slightly to reduce overlap
-                            # You can fine-tune these multipliers based on your data
                             text.set_position((x * 1.05, y * 1.05))
 
                     # Style the percentage labels
                     for autotext in autotexts:
-                        autotext.set_fontsize(24)  # Reduced from 36
+                        autotext.set_fontsize(36)  
                         autotext.set_color('white')
                         autotext.set_fontweight('bold')
                 else:
@@ -197,7 +201,7 @@ def pie_chart():
                 ax1.text(0, 0, f"{total_value}/{max_value}", 
                         horizontalalignment='center', 
                         verticalalignment='center',
-                        fontsize=36, 
+                        fontsize=56, 
                         fontweight='bold')
                 
                 ax1.axis('equal')
@@ -228,11 +232,14 @@ def pie_chart():
                         update_switch_templates(api_response=backend.get_api('api.json'))    
                     st.subheader(f"AP security: {ap_firmware_score}/10")
                     st.text(json_to_bullet_points(ap_firmware_recommendations))
-                    if st.button("Upgrade AP firmware to latest recommended version", key=f'apply_ap_firmware_upgrade{timestamp}'):
+                    if st.button("Upgrade all AP firmware to latest recommended version", key=f'apply_ap_firmware_upgrade{timestamp}'):
                         update_firmware(api_response=backend.get_site_api('api.json'))  
                         print("button pressed")
                     st.subheader(f"Switch security: {switch_firmware_score}/10")
                     st.text(json_to_bullet_points(switch_firmware_versions))
+                    if st.button("Upgrade all switch firmware to latest recommended version", key=f'apply_switch_firmware_upgrade{timestamp}'):
+                        update_firmware(api_response=backend.get_site_api('api.json'))  
+                        print("button pressed")
                     st.subheader(f"WLAN Security: {wlan_score}/10")
 
                 run_tests = False
@@ -487,7 +494,7 @@ def switch_inventory():
     )
 
 def ap_inventory():
-    ap_firmware_score, ap_firmware_recommendations, access_points = get_ap_firmware_score()
+    ap_firmware_score, ap_firmware_recommendations, access_points = get_ap_firmware_versions()
 
     ap_firmware_dict = {
         "AP45": "0.12",
@@ -610,6 +617,7 @@ def org_settings():
         st.rerun()
 
 def update_password(api_response):
+    # raw_data contains a Mist "perfect" password Policy which is then sent to the Mist cloud using a put request.
     raw_data = json.dumps({"password_policy": {"enabled": True,
                                 "min_length": 16,
                                 "requires_special_char": True,
@@ -618,16 +626,15 @@ def update_password(api_response):
     requests.put("{}/setting".format(api_response[0]), data=raw_data, headers=api_response[1])
 
 def update_firmware(api_response):
+    #returns a list or dictionary of device IDs
     upgrade_devices = get_device_ids_per_site()
 
+    #loops over all devices in all sites and uses a post request to trigger an upgrade to the latest Mist recommended firmware.
     for site in upgrade_devices:
         for device in upgrade_devices[site]:
             requests.post("{0}{1}/devices/{2}/upgrade".format(api_response[0], site, device), headers=api_response[1]).json()
 
 def update_switch_templates(api_response):
-    return 0
-
-def switch_template_recomendations(api_response):
     return 0
 
 def convert_for_download(df):
@@ -670,15 +677,9 @@ def histogram():
         'Password Policy': password_policy_score_array,
     }, index=pd.to_datetime(datetimes, format='%Y-%m-%d %H-%M-%S'))
 
-    # Sort by datetime ascending (optional)
     df = df.sort_index()
     df.iloc[::-1].reset_index(drop=True)
 
-    # Display Table (optional)
-    # st.subheader("Audit Scores Table")
-    # st.dataframe(df)
-
-    # Plot
     st.subheader("Audit Scores Visualization")
     fig, ax = plt.subplots(figsize=(20,15))
     df.plot(kind='line',
@@ -699,11 +700,15 @@ def histogram():
     st.pyplot(fig)
 
 def wlan_settings():
+    # Set sidebar drop down for navigation 
     with st.sidebar:
         st.markdown(f"# {list(page_names_to_funcs.keys())[5]}")
+        st.markdown("Radio buttons represent True or False")
+
 
     wlans, score = get_wlans()
 
+    #Render "wlans" variable as streamlit dataframe 
     st.dataframe(wlans)
     
 
