@@ -31,7 +31,7 @@ def get_device_ids_per_site():
             # Appends the above to the dev_dict based using the site variable to create a json object 
             dev_dict[site] = dev_id_list
 
-
+    print(dev_dict)
     return dev_dict
 
 

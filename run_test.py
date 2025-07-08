@@ -39,9 +39,9 @@ def run_checks_concurrently():
         switch_template_score, switch_fail_log = futures["switch_templates"].result()
         ap_firmware_score, ap_firmware_recommendations, access_points = futures["ap_firmware"].result()
         switch_firmware_score, switch_firmware_versions, switches = futures["switch_firmware"].result()
-        wlans_table, wlan_score = futures["wlans"].result()
+        wlans_table, wlan_score, wlan_recommendations = futures["wlans"].result()
 
-    return admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_score, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches, wlans_table, wlan_score
+    return admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_score, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches, wlans_table, wlan_score, wlan_recommendations
 
 def json_to_bullet_points(json_data):
     bullet_points = ""
@@ -71,7 +71,7 @@ def json_to_bullet_points(json_data):
     return bullet_points
     
 def pie_chart():
-    admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_score, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches, wlans_table, wlan_score = run_checks_concurrently()
+    admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_score, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches, wlans_table, wlan_score,wlan_recommendations = run_checks_concurrently()
     run_tests = True
 
     # Create tabs
@@ -241,6 +241,7 @@ def pie_chart():
                         update_firmware(api_response=backend.get_site_api('api.json'))  
                         print("button pressed")
                     st.subheader(f"WLAN Security: {wlan_score}/10")
+                    st.text(json_to_bullet_points(wlan_recommendations))
 
                 run_tests = False
 
@@ -706,7 +707,7 @@ def wlan_settings():
         st.markdown("Radio buttons represent True or False")
 
 
-    wlans, score = get_wlans()
+    wlans, score, recomendations = get_wlans()
 
     #Render "wlans" variable as streamlit dataframe 
     st.dataframe(wlans)
