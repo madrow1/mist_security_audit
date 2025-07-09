@@ -3,10 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 
+
 json_file_path = 'sec_audit_log.log'
 
 with open(json_file_path, 'r') as j:
-    contents = json.load(j)  # safer for files
+    contents = json.load(j)  
 
 # Prepare arrays to hold scores and datetime keys
 datetimes = []
@@ -34,10 +35,6 @@ df = pd.DataFrame({
 # Sort by datetime ascending (optional)
 df = df.sort_index()
 df.iloc[::-1].reset_index(drop=True)
-
-# Display Table (optional)
-# st.subheader("Audit Scores Table")
-# st.dataframe(df)
 
 # Plot
 st.subheader("Audit Scores Visualization")

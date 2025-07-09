@@ -14,13 +14,13 @@ def get_switch_firmware_versions():
     headers = api_response[1]
     params = {'type': 'switch'}
     dev_data = {}
-    #versions = requests.get("{}/devices/versions".format(org_response[0]), headers=headers)
 
-    #version_data = versions.json()
+    session = requests.Session()
+    session.headers.update(headers)
 
     for key in sites:
-        site_settings = requests.get("{0}{1}/stats/devices".format(api_response[0], sites[key]), headers=headers, params=params)
-        devices = requests.get("{0}{1}/devices?type=all".format(api_response[0], sites[key]), headers=headers, params=params)
+        site_settings = session.get("{0}{1}/stats/devices".format(api_response[0], sites[key]), headers=headers, params=params)
+        devices = session.get("{0}{1}/devices?type=all".format(api_response[0], sites[key]), headers=headers, params=params)
 
         data = site_settings.json()
         device_data = devices.json()
@@ -31,9 +31,8 @@ def get_switch_firmware_versions():
 
         for device in device_data:
             data_types = ['ntp_servers', 'dns_servers', 'dhcp_snooping']
-            s_device_data = requests.get("{0}{1}/devices/{2}".format(api_response[0], sites[key], device['id']), headers=headers, params=params)
+            s_device_data = session.get("{0}{1}/devices/{2}".format(api_response[0], sites[key], device['id']), headers=headers, params=params)
             dev_data = s_device_data.json()
-            #print(dev_data)
             
             for dev in dev_data:
                 match dev:
@@ -96,6 +95,7 @@ def get_switch_firmware_versions():
         count += 1
 
 
+    session.close()
 
     final_score = (score / count * 100) // 10
 
