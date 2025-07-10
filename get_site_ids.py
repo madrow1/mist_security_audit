@@ -7,6 +7,7 @@ def get_site_ids():
     api_response = backend.get_api('api.json')
     headers = api_response[1]
 
+    #Open a requests session, rather than completing a request per API call.
     session = requests.Session()
     session.headers.update(headers)
 
@@ -17,6 +18,7 @@ def get_site_ids():
     for site in site_ids_list:
         site_list.append(site['id'])
 
+    #Session is passed between functions.
     return site_list, session
 
 def get_device_ids_per_site():

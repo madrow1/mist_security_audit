@@ -72,7 +72,6 @@ def update_password(api_response):
     
     requests.put("{}/setting".format(api_response[0]), data=raw_data, headers=api_response[1])
 
-print(check_password_policy())
 
 if __name__ == "__main__":
     check_password_policy()

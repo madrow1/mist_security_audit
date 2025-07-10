@@ -68,3 +68,29 @@ def create_site(config):
     else:
         print("Site {} creation failed".format(apos_site['name']))
 
+def json_to_bullet_points(json_data):
+    bullet_points = ""
+    
+    def process_item(key, value, indent=0):
+        nonlocal bullet_points
+        indent_str = "  " * indent  
+        
+        if isinstance(value, dict): 
+            if key:  
+                bullet_points += f"{indent_str}• {key}: \n"
+            for sub_key, sub_value in value.items():
+                process_item(sub_key, sub_value, indent + 1)
+        elif isinstance(value, list):  
+            bullet_points += f"{indent_str}• {key}: \n" if key else ""  
+            for item in value:
+                if isinstance(item, dict): 
+                    process_item('', item, indent + 1)
+                else:
+                    bullet_points += f"{indent_str}  - {item}\n"
+        else:  
+            bullet_points += f"{indent_str}• {key}: {value}\n" if key else ""
+    
+    for key, value in json_data.items():
+        process_item(key, value)
+    
+    return bullet_points

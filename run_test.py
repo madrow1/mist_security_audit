@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import json 
 import backend
+from backend import json_to_bullet_points
 import requests
 from get_ap_version import get_ap_firmware_versions
 from get_switch_version import get_switch_firmware_versions 
@@ -42,33 +43,6 @@ def run_checks_concurrently():
         wlans_table, wlan_score, wlan_recommendations = futures["wlans"].result()
 
     return admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_score, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches, wlans_table, wlan_score, wlan_recommendations
-
-def json_to_bullet_points(json_data):
-    bullet_points = ""
-    
-    def process_item(key, value, indent=0):
-        nonlocal bullet_points
-        indent_str = "  " * indent  
-        
-        if isinstance(value, dict): 
-            if key:  
-                bullet_points += f"{indent_str}• {key}: \n"
-            for sub_key, sub_value in value.items():
-                process_item(sub_key, sub_value, indent + 1)
-        elif isinstance(value, list):  
-            bullet_points += f"{indent_str}• {key}: \n" if key else ""  
-            for item in value:
-                if isinstance(item, dict): 
-                    process_item('', item, indent + 1)
-                else:
-                    bullet_points += f"{indent_str}  - {item}\n"
-        else:  
-            bullet_points += f"{indent_str}• {key}: {value}\n" if key else ""
-    
-    for key, value in json_data.items():
-        process_item(key, value)
-    
-    return bullet_points
     
 def pie_chart():
     admin_score, failing_admins, firmware_score, failing_sites, password_score, recommendations, switch_template_score, switch_fail_log, ap_firmware_score, ap_firmware_recommendations, access_points, switch_firmware_score, switch_firmware_versions, switches, wlans_table, wlan_score,wlan_recommendations = run_checks_concurrently()
@@ -445,10 +419,6 @@ def switch_inventory():
         "EX9253": "21.4R3"
     }
 
-    #firmware_styles = {
-    #    '23.4R2': 'background-color: green',
-    #}
-
     def highlight_row(row):
         #required_columns = ['Root password']
 
@@ -480,7 +450,6 @@ def switch_inventory():
         
     switch_inv = pd.DataFrame(switches).T
     switch_inv.columns = ['Model', 'Name', 'Firmware', 'Site_ID', 'Device ID']
-    #switch_inv.columns = ['Model', 'Name', 'Firmware', 'Site_ID', 'Device ID', 'Root password']
     
     styled_switch_inv = switch_inv.style.apply(highlight_row, axis=1)
     
@@ -591,10 +560,15 @@ def org_settings():
     with st.sidebar:
         st.markdown(f"# {list(page_names_to_funcs.keys())[0]}")
 
+    api_options = ["https://api.eu.mist.com/api/v1/", 
+                   "https://api.mist.com/api/v1/", 
+                   "https://api.eu.mist.com/api/v1/"]
+    
+
     st.title("Enter org details below")
     org_id = st.text_input("Org ID")
     token = st.text_input("API Token")
-    url = st.text_input("Site URL")
+    url = st.selectbox(label="Select the backend API for your site", options=list(api_options))
 
     if org_id and token and url:
         data = {

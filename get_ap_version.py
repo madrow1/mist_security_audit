@@ -13,12 +13,15 @@ def get_ap_firmware_versions():
     org_response = backend.get_api("api.json")
     headers = api_response[1]
 
+
+    session = requests.Session()
+    session.headers.update(headers)
     #versions = requests.get("{}/devices/versions".format(org_response[0]), headers=headers)
 
     #version_data = versions.json()
 
     for key in sites:
-        site_settings = requests.get("{0}{1}/stats/devices".format(api_response[0], sites[key]), headers=headers)
+        site_settings = session.get("{0}{1}/stats/devices".format(api_response[0], sites[key]), headers=headers)
         data = site_settings.json()
 
         for access_point in data:
@@ -55,6 +58,8 @@ def get_ap_firmware_versions():
         count += 1
 
     final_score = (score / count * 100) // 10
+
+    session.close()
 
     return int(final_score), recomendation, access_points
                 
